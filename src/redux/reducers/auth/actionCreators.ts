@@ -12,7 +12,7 @@ export const AuthActionCreators = {
         try {
             dispatch(AuthActionCreators.setIsLoading(true));
             await axios({
-                url: `https://api.med.softix.uz/admin/login`,
+                url: `http://api.med.softix.uz/admin/login`,
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 data: JSON.stringify(authData)
