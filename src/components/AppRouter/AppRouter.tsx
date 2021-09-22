@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Redirect, Route, Switch } from 'react-router'
-import { hospitalAdmin, superAdmin } from '../../router'
+import { superAdmin } from '../../router'
 
 export interface IAppRouter {
     role?: number
