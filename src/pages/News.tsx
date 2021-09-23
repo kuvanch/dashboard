@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {ModalComponent, TableComponent} from '../components'
+import {ModalComponent, TableComponent, UploadComponent} from '../components'
 import { Button, Form, Input, Space } from 'antd'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
@@ -78,7 +78,7 @@ const columns = [
                     <Input/>
                 </Form.Item>
                 <Form.Item label='Rasm'>
-                    <Input/>
+                    <UploadComponent/>
                 </Form.Item>
               </Form>
            </ModalComponent>

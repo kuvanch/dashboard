@@ -8,6 +8,7 @@ import { Card, Col, Row, Typography } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import { TableComponent } from "../components";
+import { RouteNames } from "../router";
 
 const Home = () => {
   const dataSource = [
@@ -47,7 +48,7 @@ const Home = () => {
       <Typography.Title level={2}>Bosh sahifa</Typography.Title>
       <Row gutter={[20, 20]}>
         <Col span={12}>
-          <Link to="/hospitals">
+          <Link to={RouteNames.HOSPITALS}>
             <Card>
               <PlusSquareOutlined
                 style={{ fontSize: "40px", textAlign: "center" }}
@@ -57,7 +58,7 @@ const Home = () => {
           </Link>
         </Col>
         <Col span={12}>
-          <Link to="/news">
+          <Link to={RouteNames.NEWS}>
             <Card>
               <ContainerOutlined
                 style={{ fontSize: "40px", textAlign: "center" }}
@@ -67,7 +68,7 @@ const Home = () => {
           </Link>
         </Col>
         <Col span={12}>
-          <Link to="/consalting">
+          <Link to={RouteNames.CONSULTATIONS}>
             <Card>
               <UserSwitchOutlined
                 style={{ fontSize: "40px", textAlign: "center" }}
@@ -79,10 +80,12 @@ const Home = () => {
           </Link>
         </Col>
         <Col span={12}>
-          <Card>
-            <BankOutlined style={{ fontSize: "40px", textAlign: "center" }} />
-            <Typography.Title level={3}>Vazirlik</Typography.Title>
-          </Card>
+          <Link to={RouteNames.MINISTERS}>
+            <Card>
+              <BankOutlined style={{ fontSize: "40px", textAlign: "center" }} />
+              <Typography.Title level={3}>Vazirlik</Typography.Title>
+            </Card>
+          </Link>
         </Col>
         <Col span={24}>
           <TableComponent title='Shifoxonalar reytingi' dataSource={dataSource} columns={columns} />
