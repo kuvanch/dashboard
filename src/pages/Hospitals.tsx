@@ -62,23 +62,23 @@ export const Hospitals = () => {
       };
     return (
         <>
-           <TableComponent showModal={showModal} title='Shifoxonalar' dataSource={dataSource} columns={columns}/>
-           <ModalComponent isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible}>
-              <Form layout='horizontal'>
-                <Form.Item label='Shifoxona nomi'>
-                    <Input/>
-                </Form.Item>
-                <Form.Item label='Manzil'>
-                    <Input/>
-                </Form.Item>
-                <Form.Item label='Telefon raqami'>
-                    <Input/>
-                </Form.Item>
-                <Form.Item label='Shifoxona admini'>
-                    <Input/>
-                </Form.Item>
-                <Form.Item label='Malumot'>
-                    <Input/>
+          <TableComponent showModal={showModal} title='Shifoxonalar' dataSource={dataSource} columns={columns}/>
+          <ModalComponent isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible}>
+            <Form layout='horizontal'>  
+              <Form.Item label='Shifoxona nomi'>
+                <Input/>
+              </Form.Item>
+              <Form.Item label='Manzil'>
+                <Input/>
+              </Form.Item>
+              <Form.Item label='Telefon raqami'>
+                <Input/>
+              </Form.Item>
+              <Form.Item label='Shifoxona admini'>
+                <Input/>
+              </Form.Item>
+              <Form.Item label='Malumot'>
+                <Input/>
                 </Form.Item>
               </Form>
            </ModalComponent>

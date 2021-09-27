@@ -14,15 +14,13 @@ const Home = () => {
   const dataSource = [
     {
       key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
+      name: "Turtkul Hospital",
+      rating: 8.7
     },
     {
       key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
+      name: "Turtkul Hospital",
+      rating: 9.7,
     },
   ];
 
@@ -30,7 +28,7 @@ const Home = () => {
     {
       title: "#",
       dataIndex: "key",
-      key: "name",
+      key: "key",
     },
     {
       title: "Shifohona nomi",
@@ -40,7 +38,7 @@ const Home = () => {
     {
       title: "Reyting",
       dataIndex: "rating",
-      key: "age",
+      key: "rating",
     }
   ];
   return (

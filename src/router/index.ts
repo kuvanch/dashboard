@@ -1,5 +1,5 @@
 import React from "react";
-import { Consultaions, Diagnosis, Doctors, Hospitals, Kvp, Ministir } from "../pages";
+import { Admins, Consultaions, Diagnosis, Doctors, Hospitals, Kvp, Ministir } from "../pages";
 import Home from "../pages/Home";
 import { Login } from "../pages/Login";
 import News from "../pages/News";
@@ -18,6 +18,7 @@ export enum RouteNames  {
     HOSPITALS = '/hospitals',
     CONSULTATIONS = '/consultations',
     MINISTERS = '/ministers',
+    ADMINS = '/admins',
     DOCTORS = '/doctors',
     DIAGNOSIS = '/diagnosis',
     KVP = '/kvp'
@@ -33,6 +34,7 @@ export const superAdmin:IRoute[] = [
     {path: RouteNames.HOSPITALS, component: Hospitals, exact: true, title: 'Shifoxonalar'},
     {path: RouteNames.CONSULTATIONS, component: Consultaions, exact: true, title: 'Konsultatsiya'},
     {path: RouteNames.MINISTERS, component: Ministir, exact: true, title: 'Vazirlik'},
+    {path: RouteNames.ADMINS, component: Admins, exact: true, title: 'Adminlar'}
 ]
 
 export const hospitalAdmin:IRoute[] = [
