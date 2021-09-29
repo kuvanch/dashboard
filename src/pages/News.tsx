@@ -4,12 +4,13 @@ import { Button, Form, Input, Space } from 'antd'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
 const News = () => {
+    
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
     const showModal = () => {
       setIsModalVisible(true);
     };
-const columns = [
+    const columns = [
         {
             title: "#",
             dataIndex: "id",
@@ -18,27 +19,27 @@ const columns = [
         {
             title: "Title",
             dataIndex: "title",
-            key: "id",
+            key: "title",
         },
         {
             title: "description",
             dataIndex: "description",
-            key: "id",
+            key: "description",
         },
         {
             title: "time",
             dataIndex: "time",
-            key: "id",
+            key: "time",
         },
         {
             title: "rasm",
             dataIndex: "image",
-            key: "id",
+            key: "image",
         },
         {
             title: "Count",
             dataIndex: "count",
-            key: "id",
+            key: "count",
         },
         {
             title: 'Action',
@@ -48,7 +49,7 @@ const columns = [
                 <Button ghost type='primary' onClick={showModal}><EditOutlined /></Button>
                 <Button danger><DeleteOutlined /></Button>
               </Space>,
-          }
+        }
       ];
       const dataSource = [
         {
@@ -64,18 +65,12 @@ const columns = [
         <>
            <TableComponent showModal={showModal} title='Yangiliklar royhati' dataSource={dataSource} columns={columns}/>
            <ModalComponent isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible}>
-              <Form layout='horizontal'>
+              <Form layout='vertical'>
                 <Form.Item label='Title'>
                     <Input/>
                 </Form.Item>
                 <Form.Item label='description'>
-                    <Input/>
-                </Form.Item>
-                <Form.Item label='time'>
-                    <Input/>
-                </Form.Item>
-                <Form.Item label='Count'>
-                    <Input/>
+                    <Input.TextArea/>
                 </Form.Item>
                 <Form.Item label='Rasm'>
                     <UploadComponent/>

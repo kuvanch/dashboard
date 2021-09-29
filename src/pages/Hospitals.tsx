@@ -1,5 +1,5 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Button, Space,Form, Input} from 'antd';
+import { Button, Space,Form, Input, Row, Col} from 'antd';
 import React, { useState } from 'react'
 import { ModalComponent, TableComponent } from '../components'
 
@@ -64,23 +64,35 @@ export const Hospitals = () => {
         <>
           <TableComponent showModal={showModal} title='Shifoxonalar' dataSource={dataSource} columns={columns}/>
           <ModalComponent isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible}>
-            <Form layout='horizontal'>  
-              <Form.Item label='Shifoxona nomi'>
-                <Input/>
-              </Form.Item>
-              <Form.Item label='Manzil'>
-                <Input/>
-              </Form.Item>
-              <Form.Item label='Telefon raqami'>
-                <Input/>
-              </Form.Item>
-              <Form.Item label='Shifoxona admini'>
-                <Input/>
-              </Form.Item>
-              <Form.Item label='Malumot'>
-                <Input/>
-                </Form.Item>
-              </Form>
+            <Form layout='vertical'>
+              <Row>
+                  <Col span={12}>
+                    <Form.Item label='Shifoxona nomi'>
+                      <Input/>
+                    </Form.Item>
+                  </Col>
+                  <Col span={11} offset={1}>
+                    <Form.Item label='Manzil'>
+                      <Input/>
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item label='Telefon raqami'>
+                      <Input/>
+                    </Form.Item>
+                  </Col>
+                  <Col span={11} offset={1}>
+                    <Form.Item label='Shifoxona admini'>
+                      <Input/>
+                    </Form.Item>
+                  </Col>
+                  <Col span={24}>
+                    <Form.Item label='Malumot'>
+                      <Input.TextArea/>
+                    </Form.Item>
+                  </Col>
+              </Row>  
+            </Form>
            </ModalComponent>
         </>
     )

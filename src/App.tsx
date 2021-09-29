@@ -13,7 +13,6 @@ import { IUser } from './interfaces';
 function App() {
   const [collapsed, setCollapsed] = useState(false)
   const {isAuth} = useTypedSelector(state => state.auth)
-  console.log(isAuth);
   
   const handleTrigger = () => {
       setCollapsed(!collapsed)

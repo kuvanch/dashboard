@@ -31,8 +31,8 @@ export const Login = () => {
                 autoComplete="off"
                 >
                     <Form.Item
-                        label="Telefon raqam"
-                        name="user_phone"
+                        label="Login"
+                        name="login"
                         rules={[{ required: true, message: 'Iltimos login kiriting' }]}
                     >
                         <Input />
@@ -40,7 +40,7 @@ export const Login = () => {
 
                     <Form.Item
                         label="Parol"
-                        name="user_password"
+                        name="password"
                         rules={[{ required: true, message: 'Iltimos parol kiriting' }]}
                     >
                         <Input.Password />

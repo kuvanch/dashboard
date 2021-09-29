@@ -2,7 +2,7 @@ import { IUser } from "../../../interfaces"
 import { AuthAction, AuthActionEnum, AuthState } from "./types"
 
 const initialState: AuthState = {
-    isAuth: true,
+    isAuth: false,
     error: '',
     isLoading: false,
     user: {} as IUser

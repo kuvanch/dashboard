@@ -12,16 +12,17 @@ export const AuthActionCreators = {
         try {
             dispatch(AuthActionCreators.setIsLoading(true));
             await axios({
-                url: `http://api.med.softix.uz/admin/login`,
+                url: `http://164.90.163.79:3698/api/users/login`,
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 data: JSON.stringify(authData)
             }).then( res => {
-                if(res.data.success) {
+                console.log(res);
+                if(res.status === 200) {
                     dispatch(AuthActionCreators.setUser(res.data.data))
                     dispatch(AuthActionCreators.setIsLoading(false));
                     dispatch(AuthActionCreators.setIsAuth(true));
-                    localStorage.setItem('token',res.data.data.user_token)
+                    localStorage.setItem('token','23132132')
                     localStorage.setItem('name',res.data.data.user_full_name)
                     localStorage.setItem('role',res.data.data.role_id)
                 }

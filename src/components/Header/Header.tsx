@@ -3,13 +3,10 @@ import { MenuUnfoldOutlined,MenuFoldOutlined, BellOutlined, UserOutlined } from 
 import { Header } from 'antd/lib/layout/layout';
 import { Col, Dropdown,  Menu, Row} from 'antd';
 import { IHeader } from '../../interfaces';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useActions';
 
 
 export const HeaderPage:FC<IHeader> = ({collapsed,handleTrigger}) => {
-    const {user} = useTypedSelector(state => state.auth)
-    console.log(user);
     const {logout} = useActions()
 
     const handleLogout = () => {
@@ -24,16 +21,16 @@ export const HeaderPage:FC<IHeader> = ({collapsed,handleTrigger}) => {
               Chiqish
           </Menu.Item>
         </Menu>
-      );
+    );
     return (
         <Header className="site-layout-background"  style={{ padding: 0 }}>
-           <Row align='middle'>
-               <Col span={1}>
-                    {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-                        className: 'trigger',
-                        onClick: handleTrigger,
-                    })}
-               </Col>
+            <Row align='middle'>
+                <Col span={1}>
+                        {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                            className: 'trigger',
+                            onClick: handleTrigger,
+                        })}
+                </Col>
                 <Col span={9} offset={1} style={{display: 'flex',alignItems: 'center'}}>
                     
                 </Col>
@@ -49,5 +46,3 @@ export const HeaderPage:FC<IHeader> = ({collapsed,handleTrigger}) => {
         </Header>
     )
 }
-
- 

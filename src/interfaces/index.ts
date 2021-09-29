@@ -62,3 +62,8 @@ export interface IModal {
     isModalVisible: boolean;
     setIsModalVisible: any
 }
+
+export interface IDrawer {
+    visible: boolean;
+    setVisible?: any
+}
