@@ -44,3 +44,5 @@ export const hospitalAdmin:IRoute[] = [
     {path: RouteNames.DIAGNOSIS, component: Diagnosis, exact: true, title: '086', icon: PlusSquareOutlined},
     {path: RouteNames.KVP, component: Kvp, exact: true, title: 'KVP', icon: ContainerOutlined}
 ]
+
+export const routes = localStorage.getItem('role') === 'ROLE_SUPER_ADMIN' ? superAdmin : hospitalAdmin

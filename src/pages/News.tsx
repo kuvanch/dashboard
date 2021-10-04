@@ -1,20 +1,35 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import {ModalComponent, TableComponent, UploadComponent} from '../components'
 import { Button, Form, Input, Space } from 'antd'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { INewsState } from '../interfaces';
+import { useActions } from '../hooks/useActions';
+import { useTypedSelector } from '../hooks/useTypedSelector';
+import { addKeyObj } from '../helpers/addKeyObj';
 
 const News = () => {
     
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-
+    const [form, setForm] = useState({} as INewsState)
+    const onChange = (e:ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setForm({...form,[e.target.name]: e.target.value})
+    }
     const showModal = () => {
       setIsModalVisible(true);
     };
+    const {getAllBlogs,addBlog} = useActions()
+    const {data, isLoading} = useTypedSelector(state => state.blog)
+    const newData = addKeyObj(data)
+    
+    useEffect(() => {
+        getAllBlogs()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     const columns = [
         {
             title: "#",
-            dataIndex: "id",
-            key: "id",
+            dataIndex: "num",
+            key: "num",
         },
         {
             title: "Title",
@@ -26,20 +41,26 @@ const News = () => {
             dataIndex: "description",
             key: "description",
         },
-        {
-            title: "time",
-            dataIndex: "time",
-            key: "time",
-        },
+
         {
             title: "rasm",
             dataIndex: "image",
             key: "image",
         },
         {
-            title: "Count",
-            dataIndex: "count",
-            key: "count",
+            title: "Views",
+            dataIndex: "views",
+            key: "views",
+        },
+        {
+            title: "createdAt",
+            dataIndex: "createdAt",
+            key: "createdAt",
+        },
+        {
+            title: "updatedAt",
+            dataIndex: "updatedAt",
+            key: "updatedAt",
         },
         {
             title: 'Action',
@@ -51,29 +72,24 @@ const News = () => {
               </Space>,
         }
       ];
-      const dataSource = [
-        {
-          id: "1",
-          title: "Turtkul hospital",
-          description: "10 Downing Street",
-          time: '+999999999',
-          image: 'aaaaaa',
-          count: '111'
-        }
-      ];
+      
+    const onSendBlog = () => {
+        addBlog(form)
+        getAllBlogs()
+    }
     return (
         <>
-           <TableComponent showModal={showModal} title='Yangiliklar royhati' dataSource={dataSource} columns={columns}/>
-           <ModalComponent isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible}>
-              <Form layout='vertical'>
+           <TableComponent loading={isLoading} showModal={showModal} title='Yangiliklar royhati' dataSource={newData} columns={columns}/>
+           <ModalComponent isModalVisible={isModalVisible} handleOk={onSendBlog} setIsModalVisible={setIsModalVisible}>
+              <Form layout='vertical' >
                 <Form.Item label='Title'>
-                    <Input/>
+                    <Input name='title' onChange={onChange}/>
                 </Form.Item>
-                <Form.Item label='description'>
-                    <Input.TextArea/>
+                <Form.Item label='description' name='description'>
+                    <Input.TextArea name='description' onChange={onChange}/>
                 </Form.Item>
-                <Form.Item label='Rasm'>
-                    <UploadComponent/>
+                <Form.Item label='Rasm' name='photoId'>
+                    <UploadComponent imgUpload={form} setImgUpload={setForm}/>
                 </Form.Item>
               </Form>
            </ModalComponent>

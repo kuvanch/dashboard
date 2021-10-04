@@ -1,13 +1,12 @@
 import React, { FC } from 'react'
 import { Redirect, Route, Switch } from 'react-router'
-import { hospitalAdmin, superAdmin } from '../../router'
+import { routes } from '../../router'
 
 export interface IAppRouter {
     role?: number
 }
 
 export const AppRouter:FC<IAppRouter> = ({role}) => {
-    const routes = false ? superAdmin : hospitalAdmin
 
     return (
             <Switch>

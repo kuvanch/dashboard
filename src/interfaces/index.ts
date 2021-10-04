@@ -15,6 +15,7 @@ export interface ITable {
     dataSource?: any;
     title: string;
     value?: string;
+    loading?: boolean;
     showModal?: () => void;
     onChange?: () => void
 }
@@ -60,10 +61,32 @@ export interface IUser {
 
 export interface IModal {
     isModalVisible: boolean;
-    setIsModalVisible: any
+    setIsModalVisible: any;
+    handleOk?: (values:any) => void
 }
 
 export interface IDrawer {
     visible: boolean;
     setVisible?: any
+}
+
+export interface IUpload {
+    imgUpload?: INewsState;
+    setImgUpload?: any;
+}
+
+export interface INewsState {
+    title: string;
+    description: string;
+    photoId: string[];
+}
+
+export interface INewsData {
+    id: string;
+    title: string;
+    description: string;
+    attachment: string[];
+    views: number | null;
+    createdAt: number;
+    updatedAt: number;
 }

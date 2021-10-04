@@ -1,28 +1,50 @@
 import { Upload, message, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
+import { FC } from 'react';
+import { IUpload } from '../../interfaces';
+import axios from 'axios';
 
 
 
-export const UploadComponent = () => {
-    const props = {
-        name: 'file',
-        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-        headers: {
-          authorization: 'authorization-text',
-        },
-        onChange(info?:any) {
-          if (info.file.status !== 'uploading') {
-            console.log(info.file, info.fileList);
-          }
+
+
+export const UploadComponent:FC<IUpload> = ({imgUpload,setImgUpload}) => {
+
+    const onChange = (info?:any) => {
           if (info.file.status === 'done') {
             message.success(`${info.file.name} file uploaded successfully`);
+            let fileList = [...info.fileList];
+            fileList = fileList.slice(-1);
+            setImgUpload({...imgUpload,photoId: fileList[0]})
+            
           } else if (info.file.status === 'error') {
             message.error(`${info.file.name} file upload failed.`);
           }
-        },
-      };
+        }
+        const uploadImage = options => {
+
+          const { onSuccess, onError, file } = options;
+        
+          const fmData = new FormData();
+          const config = {
+            headers: { "content-type": "multipart/form-data",'Authorization': `Bearer ${localStorage.getItem('token')}`},
+          };
+          fmData.append("image", file);
+          axios
+            .post("http://164.90.163.79:3698/api/attachment/upload", fmData, config)
+            .then(res => {
+              onSuccess(file);
+              console.log(res);
+              setImgUpload({...imgUpload, photoId: res.data })
+            })
+            .catch(err=>{
+              const error = new Error('Some error');
+              onError({event:error});
+            });
+        }
     return (
-    <Upload {...props}>
-      <Button icon={<UploadOutlined />}>Click to Upload</Button>
-    </Upload>)
+      <Upload name='file' onChange={onChange} customRequest={uploadImage}>
+        <Button icon={<UploadOutlined />}>Click to Upload</Button>
+      </Upload>
+    )
 }

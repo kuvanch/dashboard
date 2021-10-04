@@ -57,10 +57,12 @@ export const Doctors = () => {
         }
       ];
       const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-
+      const [imgUpload, setImgUpload] = useState<File>();
       const showModal = () => {
         setIsModalVisible(true);
       };
+      console.log(imgUpload);
+      
     return (
         <>
             <TableComponent showModal={showModal} title='Shifoxonalar' dataSource={dataSource} columns={columns}/>
@@ -89,7 +91,7 @@ export const Doctors = () => {
                   </Col>
                   <Col span={24}>
                     <Form.Item label='Rasm'>
-                        <UploadComponent/>
+                        <UploadComponent setImgUpload={setImgUpload}/>
                     </Form.Item>
                   </Col>
               </Row>  

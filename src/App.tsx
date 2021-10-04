@@ -9,11 +9,11 @@ import { Login } from './pages';
 import { useTypedSelector } from './hooks/useTypedSelector';
 import { useActions } from './hooks/useActions';
 import { IUser } from './interfaces';
+import axios from 'axios';
 
 function App() {
   const [collapsed, setCollapsed] = useState(false)
   const {isAuth} = useTypedSelector(state => state.auth)
-  
   const handleTrigger = () => {
       setCollapsed(!collapsed)
   }
@@ -21,9 +21,22 @@ function App() {
 
     useEffect(() => {
         if(localStorage.getItem('token')) {
-            setUser({user_full_name: localStorage.getItem('name' || '')} as IUser)
-            setIsAuth(true);
+          axios({
+            method: 'GET',
+            url: 'http://164.90.163.79:3698/api/superAdmin/allAdmins',
+            headers:{'Authorization': `Bearer ${localStorage.getItem('token')}`}
+          }).then(res => {
+              if(res.status === 200) {
+                setIsAuth(true);
+                setUser({user_full_name: localStorage.getItem('name' || '')} as IUser)
+              }else if ([401,403].includes(res.status)) {
+                localStorage.removeItem('token')
+                localStorage.removeItem('role')
+                setIsAuth(false)
+              }
+          })
         }
+        
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
   return (

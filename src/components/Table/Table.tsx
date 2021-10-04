@@ -3,10 +3,10 @@ import { ITable } from '../../interfaces';
 import { Button, Col, Row, Table, Typography } from 'antd'
 import {Input} from 'antd';
 
-export const TableComponent:FC<ITable> = ({dataSource,columns,title,value,onChange,showModal}:ITable) => {
+export const TableComponent:FC<ITable> = ({dataSource,columns,title,value,loading,onChange,showModal}:ITable) => {
     const { Search } = Input;
     const onSearch = (value:string) => console.log(value);
-    return  <Table 
+    return  <Table loading={loading}
         title={() => (
             <Row justify='space-between' align='middle'>
                 <Col span={6}>

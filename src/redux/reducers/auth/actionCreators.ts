@@ -2,7 +2,7 @@ import {AuthActionEnum, SetAuthAction, SetErrorAction, SetIsLoadingAction, SetUs
 import {AppDispatch} from "../../index";
 import axios from "axios";
 import { IAuthData, IUser } from "../../../interfaces";
-
+import {decodeToken} from 'react-jwt';
 export const AuthActionCreators = {
     setUser: (user: IUser): SetUserAction => ({type: AuthActionEnum.SET_USER, payload: user}),
     setIsAuth: (auth: boolean): SetAuthAction => ({type: AuthActionEnum.SET_AUTH, payload: auth}),
@@ -17,14 +17,12 @@ export const AuthActionCreators = {
                 headers: {'Content-Type': 'application/json'},
                 data: JSON.stringify(authData)
             }).then( res => {
-                console.log(res);
                 if(res.status === 200) {
-                    dispatch(AuthActionCreators.setUser(res.data.data))
                     dispatch(AuthActionCreators.setIsLoading(false));
                     dispatch(AuthActionCreators.setIsAuth(true));
-                    localStorage.setItem('token','23132132')
-                    localStorage.setItem('name',res.data.data.user_full_name)
-                    localStorage.setItem('role',res.data.data.role_id)
+                    localStorage.setItem('token',res.data.object.token)
+                    const token: any = decodeToken(res.data.object.token)
+                    localStorage.setItem('role',token.role[0].roleName)
                 }
             })
         }catch(err) {
@@ -34,7 +32,6 @@ export const AuthActionCreators = {
     },
     logout: () => async (dispatch: AppDispatch) => {
         localStorage.removeItem('token')
-        localStorage.removeItem('name')
         localStorage.removeItem('role')
         dispatch(AuthActionCreators.setUser({} as IUser));
         dispatch(AuthActionCreators.setIsAuth(false))

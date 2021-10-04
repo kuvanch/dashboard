@@ -1,11 +1,13 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
 import authReducer from "./reducers/auth/authReducer";
+import blogReducer from "./reducers/blog/blogReducer";
 
 
 
 const rootReducer = combineReducers({
-    auth: authReducer
+    auth: authReducer,
+    blog: blogReducer
 })
 
 export const store = createStore(rootReducer,applyMiddleware(thunk))

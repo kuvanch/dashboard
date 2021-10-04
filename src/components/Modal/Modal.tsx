@@ -2,12 +2,7 @@ import React, { FC } from 'react';
 import { Modal } from 'antd';
 import { IModal } from '../../interfaces';
 
-export const ModalComponent:FC<IModal> = ({children,isModalVisible,setIsModalVisible}) => {
-  
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
+export const ModalComponent:FC<IModal> = ({children,isModalVisible,setIsModalVisible,handleOk}) => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
