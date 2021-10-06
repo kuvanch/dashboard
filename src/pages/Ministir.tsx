@@ -1,52 +1,133 @@
-import React from 'react'
-import { TableComponent } from '../components'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { Input,Form, Space, Button, Row, Col, Popconfirm } from 'antd';
+import React, { ChangeEvent, useEffect, useState } from 'react'
+import { ModalComponent, TableComponent, UploadComponent } from '../components'
+import { addKeyObj } from '../helpers/addKeyObj';
+import { useActions } from '../hooks/useActions';
+import { useTypedSelector } from '../hooks/useTypedSelector';
+import { IMinisterData } from '../interfaces';
 
 export const Ministir = () => {
+    const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+    const [form, setForm] = useState({} as IMinisterData)
+    const [refresh, setRefresh] = useState<boolean>(false)
+    const onChange = (e:ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setForm({...form,[e.target.name]: e.target.value})
+    }
+    const showModal = () => {
+      setIsModalVisible(true);
+    };
     const columns = [
         {
           title: "#",
-          dataIndex: "id",
-          key: "id",
+          dataIndex: "num",
+          key: "num",
         },
         {
-          title: "FIO",
-          dataIndex: "fullname",
-          key: "name",
+          title: "Familiya",
+          dataIndex: "lastName",
+          key: "lastName",
         },
         {
-            title: "Rasm",
-            dataIndex: "image",
-            key: "name",
+            title: "Ism",
+            dataIndex: "firstName",
+            key: "firstName",
         },
         {
-            title: "Telefon raqami",
-            dataIndex: "telefon",
-            key: "age",
+            title: "Otasining ismi",
+            dataIndex: "middleName",
+            key: "middleName",
         },
         {
-            title: "Email",
-            dataIndex: "email",
-            key: "age",
-        },
-        {
-            title: "Description",
+            title: "Malumot",
             dataIndex: "description",
-            key: "age",
+            key: "description",
         },
-      ];
-      const dataSource = [
         {
-          id: "1",
-          fullname: "Turtkul hospital",
-          image: "10 Downing Street",
-          telefon: '+999999999',
-          email: 'aaaaaa',
-          description: 'ssssss'
+            title: "Telefon",
+            dataIndex: "phoneNumber",
+            key: "phoneNumber",
+        },
+        {
+            title: "Pochta",
+            dataIndex: "email",
+            key: "email",
+        },
+        {
+            title: 'Action',
+            dataIndex: '',
+            key: 'x',
+            render: (value) => <Space>
+                <Button ghost type='primary' onClick={showModal}><EditOutlined /></Button>
+                <Popconfirm placement="topLeft" title='Siz ochirmoqchimisiz' onConfirm={()=> onDelete(value.id)} okText="Ha" cancelText="Yoq">
+                  <Button danger><DeleteOutlined /></Button>
+                </Popconfirm>
+              </Space>,
         }
       ];
+    const {getAllMinister, addMinister,deleteMinister} = useActions()
+    const {data,isLoading} = useTypedSelector(state => state.minister)
+    useEffect(() => {
+      getAllMinister()
+    }, [refresh])
+    const newData = addKeyObj(data)
+
+    const onDelete = async (id) => {
+      await deleteMinister(id)
+      setRefresh(!refresh)
+    }
+
+    const onSend = async () => {
+      await addMinister(form)
+      setForm({} as IMinisterData)
+      setIsModalVisible(false)
+      setRefresh(!refresh)
+    }
     return (
         <>
-          <TableComponent title='Vazirlar royhati' dataSource={dataSource} columns={columns}/>   
+          <TableComponent loading={isLoading} showModal={showModal} title='Vazirlar royhati' dataSource={newData} columns={columns}/>
+          <ModalComponent title='Министер' handleOk={onSend} width={1000} isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible}>
+              <Form layout='vertical' >
+                <Row gutter={20}>
+                  <Col span={12}>
+                    <Form.Item label='Familiya'>
+                      <Input name='lastName' value={form.lastName} onChange={onChange}/>
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item label='Ism'>
+                      <Input name='firstName' value={form.firstName} onChange={onChange}/>
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item label='Otasining Ismi'>
+                      <Input name='middleName' value={form.middleName} onChange={onChange}/>
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item label='Telefon raqam'>
+                      <Input name='phoneNumber' value={form.phoneNumber} onChange={onChange}/>
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item label='Elektron pochta'>
+                      <Input name='email' type='email' value={form.email} onChange={onChange}/>
+                    </Form.Item>
+                  </Col>
+                  <Col span={24}>
+                    <Form.Item label='Malumot'>
+                      <Input.TextArea name='description' value={form.description} rows={4} onChange={onChange}/>
+                    </Form.Item>
+                  </Col>
+                  <Col span={24}>
+                    <Form.Item label='Rasm' name='photoId'>
+                      <UploadComponent imgUpload={form} setImgUpload={setForm}/>
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </Form>
+           </ModalComponent>
         </>
     )
 }

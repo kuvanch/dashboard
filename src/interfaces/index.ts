@@ -62,6 +62,9 @@ export interface IUser {
 export interface IModal {
     isModalVisible: boolean;
     setIsModalVisible: any;
+    title: string;
+    width?: null | 1000;
+    loading?: boolean;
     handleOk?: (values:any) => void
 }
 
@@ -71,7 +74,7 @@ export interface IDrawer {
 }
 
 export interface IUpload {
-    imgUpload?: INewsState;
+    imgUpload?: any;
     setImgUpload?: any;
 }
 
@@ -89,4 +92,16 @@ export interface INewsData {
     views: number | null;
     createdAt: number;
     updatedAt: number;
+}
+
+
+export interface IMinisterData {
+    id?: number;
+    firstName: string;
+    lastName: string;
+    middleName: string;
+    description: string;
+    email: string;
+    phoneNumber: string;
+    photoIds: string[]
 }

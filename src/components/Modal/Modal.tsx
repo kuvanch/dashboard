@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Modal } from 'antd';
 import { IModal } from '../../interfaces';
 
-export const ModalComponent:FC<IModal> = ({children,isModalVisible,setIsModalVisible,handleOk}) => {
+export const ModalComponent:FC<IModal> = ({children,loading = false,isModalVisible,setIsModalVisible,title,handleOk,width}) => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -10,7 +10,7 @@ export const ModalComponent:FC<IModal> = ({children,isModalVisible,setIsModalVis
 
   return (
     <>
-      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+      <Modal confirmLoading={loading} title={title} width={width} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         {children}
       </Modal>
     </>

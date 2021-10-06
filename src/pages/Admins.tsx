@@ -75,7 +75,7 @@ export const Admins = () => {
     return (
         <div>
             <TableComponent title='Shifoxona adminlari' showModal={showModal} dataSource={dataSource} columns={columns}/>
-            <ModalComponent isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible}>
+            <ModalComponent title='Министер' isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible}>
             <Form layout='vertical'>
                 <Row>
                     <Col span={24}>

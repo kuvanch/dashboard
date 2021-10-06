@@ -58,7 +58,7 @@ export const Consultaions = () => {
     return (
         <>
             <TableComponent title='Konsultatsiya otuvchilar' showModal={showModal} dataSource={dataSource} columns={columns}/>
-            <ModalComponent isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible}>
+            <ModalComponent title='Министер' isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible}>
             <Form layout='vertical'>
                 <Form.Item label='FIO'>
                     <Input/>

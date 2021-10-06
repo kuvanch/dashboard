@@ -12,13 +12,13 @@ export const UploadComponent:FC<IUpload> = ({imgUpload,setImgUpload}) => {
 
     const onChange = (info?:any) => {
           if (info.file.status === 'done') {
-            message.success(`${info.file.name} file uploaded successfully`);
+            message.success(`${info.file.name} rasm yuklandi`);
             let fileList = [...info.fileList];
             fileList = fileList.slice(-1);
             setImgUpload({...imgUpload,photoId: fileList[0]})
             
           } else if (info.file.status === 'error') {
-            message.error(`${info.file.name} file upload failed.`);
+            message.error(`${info.file.name} rasm yuklashda xatolik`);
           }
         }
         const uploadImage = options => {
@@ -34,8 +34,7 @@ export const UploadComponent:FC<IUpload> = ({imgUpload,setImgUpload}) => {
             .post("http://164.90.163.79:3698/api/attachment/upload", fmData, config)
             .then(res => {
               onSuccess(file);
-              console.log(res);
-              setImgUpload({...imgUpload, photoId: res.data })
+              setImgUpload({...imgUpload, photoIds: res.data })
             })
             .catch(err=>{
               const error = new Error('Some error');
@@ -44,7 +43,7 @@ export const UploadComponent:FC<IUpload> = ({imgUpload,setImgUpload}) => {
         }
     return (
       <Upload name='file' onChange={onChange} customRequest={uploadImage}>
-        <Button icon={<UploadOutlined />}>Click to Upload</Button>
+        <Button icon={<UploadOutlined />}>Rasm yuklash</Button>
       </Upload>
     )
 }

@@ -80,7 +80,7 @@ const News = () => {
     return (
         <>
            <TableComponent loading={isLoading} showModal={showModal} title='Yangiliklar royhati' dataSource={newData} columns={columns}/>
-           <ModalComponent isModalVisible={isModalVisible} handleOk={onSendBlog} setIsModalVisible={setIsModalVisible}>
+           <ModalComponent title='Министер' isModalVisible={isModalVisible} handleOk={onSendBlog} setIsModalVisible={setIsModalVisible}>
               <Form layout='vertical' >
                 <Form.Item label='Title'>
                     <Input name='title' onChange={onChange}/>

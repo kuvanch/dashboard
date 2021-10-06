@@ -63,7 +63,7 @@ export const Hospitals = () => {
     return (
         <>
           <TableComponent showModal={showModal} title='Shifoxonalar' dataSource={dataSource} columns={columns}/>
-          <ModalComponent isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible}>
+          <ModalComponent title='Министер' isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible}>
             <Form layout='vertical'>
               <Row>
                   <Col span={12}>
