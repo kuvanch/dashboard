@@ -43,7 +43,7 @@ function App() {
     <>
         <BrowserRouter>
             {
-              !isAuth ?
+              false ?
               <Switch>
                 <Route path='/login' component={Login}/>
                 <Redirect to='/login'/>
